@@ -5,7 +5,8 @@ Based on https://github.com/ros-industrial-attic/ur_modern_driver
 ros2 run ur_ros2_driver ur_driver
 
 #and wait until "DEBUG: Realtime port: Got connection" message
-
+#Additionally, host IP address can be set as an optional argument:
+ros2 run ur_ros2_driver ur_driver 192.168.1.2
 
 ##############################
 
