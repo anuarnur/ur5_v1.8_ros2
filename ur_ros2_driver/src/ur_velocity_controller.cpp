@@ -54,7 +54,7 @@ class Ros2Wrapper : public rclcpp::Node
 		rt_interface->start();
 		ip_addr_ = rt_interface->getLocalIp();
 		print_debug(
-				"Listening on " + ip_addr_ + ":" + std::to_string(reverse_port)
+				"Listening on " + ip_addr_ 
 						+ "\n");
 		
 		speed_sub_ = this->create_subscription<std_msgs::msg::Float64MultiArray>(
@@ -107,7 +107,6 @@ class Ros2Wrapper : public rclcpp::Node
 	
 	mutable std::string ip_addr_;
 	mutable double firmware_version_;
-	mutable unsigned int reverse_port = 50001;
 	mutable double servoj_time;
 	mutable double current_velocity[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 	mutable std::vector<double> qd_actual_;
@@ -133,6 +132,10 @@ int main(int argc, char * argv[])
 {
 	bool use_sim_time = false;
 	std::string host = "192.168.1.2";
+	if ( (argc == 2))
+         host = argv[1];
+	print_debug("Connecting to " + host + "\n");
+	
 	std::condition_variable rt_msg_cond_;
 	std::condition_variable msg_cond_;
 	UrRealtimeCommunication* rt_interface_;
